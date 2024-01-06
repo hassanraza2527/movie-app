@@ -9,7 +9,7 @@ const TrendingMovies = ({ data }) => {
   const navigation = useNavigation();
 
   const handleClick = (item) => {
-    navigation.navigate('Movies', item);
+    navigation.navigate('Movie', item);
   };
   return (
     <View style={{ marginBottom: 8 }}>
