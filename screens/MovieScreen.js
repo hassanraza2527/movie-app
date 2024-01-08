@@ -14,6 +14,8 @@ import { HeartIcon } from 'react-native-heroicons/solid';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles, theme } from '../theme';
 import { LinearGradient } from 'expo-linear-gradient';
+import Cast from '../coponent/cast';
+import MovieList from '../coponent/movieList';
 
 var { width, height } = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
@@ -23,6 +25,8 @@ const MovieScreen = () => {
   const { prams: item } = useRoute();
   let movieName = 'Kung Fu Panda 4';
   const navigation = useNavigation();
+  const [cast, setCast] = useState([1, 2, 3, 4, 5]);
+  const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4, 5]);
   const [isFavorite, toggleFavorite] = useState(false);
   useEffect(() => {}, item);
   return (
@@ -33,7 +37,7 @@ const MovieScreen = () => {
         backgroundColor: '#333',
       }}
     >
-      <View style={{ width: '100%', flex: 1 }}>
+      <View style={{ width: '100%' }}>
         <SafeAreaView
           style={{
             position: 'absolute',
@@ -51,7 +55,7 @@ const MovieScreen = () => {
               styles.background,
               {
                 backgroundColor: '#eab308',
-                borderRadius: 15,
+                borderRadius: 18,
                 padding: 4,
               },
             ]}
@@ -71,7 +75,7 @@ const MovieScreen = () => {
             style={{ width, height: height * 0.55 }}
           />
           <LinearGradient
-            colors={['transparent', 'rgba(23,23,23,0.8)', 'rgba(23,23,23,1)']}
+            colors={['transparent', 'rgba(23,23,23,0.9)', 'rgba(23,23,23,1)']}
             style={{
               width,
               height: height * 0.4,
@@ -104,7 +108,68 @@ const MovieScreen = () => {
         >
           Released . 2024 . 150 min
         </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginHorizontal: 20,
+            paddingHorizontal: 16,
+          }}
+        >
+          <Text
+            style={{
+              color: '#A1A1A1',
+              fontWeight: '600',
+              fontSize: 16,
+              textAlign: 'center',
+            }}
+          >
+            Action .
+          </Text>
+
+          <Text
+            style={{
+              color: '#A1A1A1',
+              fontWeight: '600',
+              fontSize: 16,
+              textAlign: 'center',
+            }}
+          >
+            Thrill .
+          </Text>
+
+          <Text
+            style={{
+              color: '#A1A1A1',
+              fontWeight: '600',
+              fontSize: 16,
+              textAlign: 'center',
+            }}
+          >
+            Comedy
+          </Text>
+        </View>
+        <Text
+          style={{
+            color: '#A1A1A1',
+            marginHorizontal: 20,
+            letterSpacing: 1,
+          }}
+        >
+          Po must train a new warrior when he's chosen to become the spiritual
+          leader of the Valley of Peace. However, when a powerful shape-shifting
+          sorceress sets her eyes on his Staff of Wisdom, he suddenly realizes
+          he's going to need some help. Teaming up with a quick-witted corsac
+          fox, Po soon discovers that heroes can be found in the most unexpected
+          places.
+        </Text>
       </View>
+      <Cast cast={cast} navigation={navigation} />
+      <MovieList
+        title={'Similar Movies'}
+        data={similarMovies}
+        hideSeeAll={true}
+      />
     </ScrollView>
   );
 };

@@ -13,7 +13,7 @@ import { styles } from '../theme';
 
 var { width, height } = Dimensions.get('window');
 
-const MovieList = ({ title, data }) => {
+const MovieList = ({ title, data, hideSeeAll }) => {
   let movieName = 'Kung Fu Panda 4';
   const navigation = useNavigation();
   return (
@@ -27,9 +27,11 @@ const MovieList = ({ title, data }) => {
         }}
       >
         <Text style={{ color: 'white', fontSize: 18 }}>{title}</Text>
-        <TouchableOpacity>
-          <Text style={[styles.text, { fontSize: 18 }]}>See All</Text>
-        </TouchableOpacity>
+        {!hideSeeAll && (
+          <TouchableOpacity>
+            <Text style={[styles.text, { fontSize: 18 }]}>See All</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView
         horizontal
@@ -40,7 +42,7 @@ const MovieList = ({ title, data }) => {
           return (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => navigation.navigate('Movie', item)}
+              onPress={() => navigation.push('Movie', item)}
             >
               <View
                 style={{
