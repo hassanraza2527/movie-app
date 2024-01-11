@@ -12,11 +12,13 @@ import {
 import React, { useState } from 'react';
 import { XMarkIcon } from 'react-native-heroicons/outline';
 import { useNavigation } from '@react-navigation/native';
+import Loading from '../coponent/loading';
 var { width, height } = Dimensions.get('window');
 const SearchScreen = () => {
   let movieName = 'Kung Fu Panda 4';
   const navigation = useNavigation();
   const [results, setResults] = useState([1, 2, 3, 4]);
+  const [loading, setLoading] = useState(false);
   return (
     <SafeAreaView style={{ backgroundColor: '#333', flex: 1 }}>
       <View
@@ -58,7 +60,9 @@ const SearchScreen = () => {
           <XMarkIcon size={25} color={'white'} />
         </TouchableOpacity>
       </View>
-      {results.length > 0 ? (
+      {loading ? (
+        <Loading />
+      ) : results.length > 0 ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 15 }}
